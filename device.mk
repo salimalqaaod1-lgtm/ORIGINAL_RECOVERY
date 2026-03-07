@@ -1,4 +1,4 @@
-LOCAL_PATH := device/MT9632/m7332
+LOCAL_PATH := .
 
 # Sideband for Remote Control
 PRODUCT_COPY_FILES += \
