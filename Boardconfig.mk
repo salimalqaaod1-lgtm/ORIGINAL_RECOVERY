@@ -1,0 +1,43 @@
+DEVICE_PATH := device/MT9632/m7332
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := generic
+TARGET_USES_64_BIT_BINDER := true
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := m7332,MT9632,full_m7332
+
+# Kernel Data from Unpack
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_BOOTIMG_HEADER_VERSION := 2
+BOARD_KERNEL_BASE := 0x40000000
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x04000000
+BOARD_TAGS_OFFSET := 0x01000000
+
+# Kernel Command Line
+BOARD_KERNEL_CMDLINE := androidboot.boot_devices=mstar_mci.0 buildvariant=userdebug
+
+# Platform
+TARGET_BOARD_PLATFORM := mt9632
+TARGET_BOARD_PLATFORM_GPU := mali-g52
+
+# Partitions (Dynamic Partitions Support)
+BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_SUPER_PARTITION_GROUPS := mstar_dynamic_partitions
+BOARD_MSTAR_DYNAMIC_PARTITIONS_SIZE := 4294967296
+BOARD_MSTAR_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product odm
+
+# TWRP Specific Configs
+TW_THEME := landscape_hdpi
+TW_INSERT_ABC_CHECK := true
+TW_EXCLUDE_PYTHON := true
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 150
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_SUPPORT_USB_OTG := true
