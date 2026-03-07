@@ -1,0 +1,41 @@
+# mount point fstype device flags
+/system ext4 system 
+display="System";logical;first_stage_mount 
+/vendor ext4 vendor 
+display="Vendor";logical;first_stage_mount 
+/product ext4 product 
+display="Product";logical;first_stage_mount 
+/odm ext4 odm 
+display="Odm";logical;first_stage_mount 
+/data ext4 
+/dev/block/platform/mstar_mci.0/by-name/userdata 
+flags=display="Data" /cache ext4 
+/dev/block/platform/mstar_mci.0/by-name/cache 
+display="Cache" /metadata ext4 
+/dev/block/platform/mstar_mci.0/by-name/metadata 
+display="Metadata" /boot emmc 
+/dev/block/platform/mstar_mci.0/by-name/boot 
+display="Boot";backup=1;flashimg=1 
+/recovery emmc 
+/dev/block/platform/mstar_mci.0/by-name/recovery 
+display="Recovery";backup=1;flashimg=1 
+/dtb emmc 
+/dev/block/platform/mstar_mci.0/by-name/dtb 
+display="DTB";backup=1;flashimg=1 /dtbo 
+emmc 
+/dev/block/platform/mstar_mci.0/by-name/dtbo 
+display="DTBO";backup=1;flashimg=1 /misc 
+emmc 
+/dev/block/platform/mstar_mci.0/by-name/misc 
+display="Misc" /mnt/vendor/tvservice 
+squashfs 
+/dev/block/platform/mstar_mci.0/by-name/tvservice 
+display="TV Service";backup=1 
+/vendor/tvconfig ext4 
+/dev/block/platform/mstar_mci.0/by-name/tvconfig 
+display="TV Config";backup=1 
+/external_sd vfat /dev/block/mmcblk1p1 
+display="SD 
+Card";storage;wipeui;removable /usb_otg 
+vfat /dev/block/sda1 
+display="USB-OTG";storage;wipeui;removable
