@@ -6,4 +6,4 @@ PRODUCT_COPY_FILES += \
 
 # Support for Dynamic Partitions
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/first_stage_ramdisk/fstab.m7332:recovery/root/first_stage_ramdisk/fstab.m7332
+    $(LOCAL_PATH)/recovery.fstab:recovery/root/first_stage_ramdisk/fstab.m7332
