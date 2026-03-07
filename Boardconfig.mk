@@ -34,13 +34,17 @@ BOARD_MSTAR_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product odm
 
 # TWRP Specific Configs
 TW_THEME := landscape_hdpi
-TW_INSERT_ABC_CHECK := true
-TW_EXCLUDE_PYTHON := true
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/backlight/brightness"
+DEVICE_SCREEN_WIDTH := 1280
+DEVICE_SCREEN_HEIGHT := 720
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 150
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_SUPPORT_USB_OTG := true
+
+TW_NO_SCREEN_TIMEOUT := true
+TW_NO_BATT_PERCENT := true
+TW_EXCLUDE_ENVELOPES := true
 
 # DTB Configuration
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/dtb.img
