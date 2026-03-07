@@ -1,0 +1,6 @@
+#line 1 "vendor/mediatek/proprietary_tv/open/system/sepolicy/product/private/property_contexts"
+ms.avp.no.seek.zero                         u:object_r:system_prop:s0
+ms.mstplayer.no.seek.zero                   u:object_r:system_prop:s0
+debug.stagefright.ccodec                    u:object_r:system_prop:s0
+user.mstar.mstplayer.exist                  u:object_r:debug_prop:s0
+ms.mstplayer.no.sideband                    u:object_r:system_prop:s0
