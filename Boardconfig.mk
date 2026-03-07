@@ -1,4 +1,4 @@
-DEVICE_PATH := device/MT9632/m7332
+DEVICE_PATH := .
 
 # Architecture
 TARGET_ARCH := arm
