@@ -43,40 +43,24 @@ jobs:
         mkdir -p twrp/device/mediatek/m7332
         cp -r ./* twrp/device/mediatek/m7332/ || true
 
-    - name: Build TWRP
+    -     - name: Build TWRP
       run: |
         cd twrp
         source build/envsetup.sh
         
-        # قراءة اسم المنتج من الملف بدون تشغيله كأمر
-        # سيقوم بالبحث عن السطر COMMON_LUNCH_CHOICES ويستخلص الاسم منه
-        PRODUCT_NAME=$(grep "COMMON_LUNCH_CHOICES" ../AndroidProducts.mk | cut -d'=' -f2 | awk '{print $1}' | cut -d'-' -f1)
+        # أمر ذكي للبحث عن أي ملف إعداد منتج متاح وتحديده تلقائياً
+        PRODUCT_CONF=$(find device/mediatek/m7332/ -name "twrp_*.mk" | head -n 1 | xargs basename | cut -d'.' -f1)
         
-        echo "The detected product is: $PRODUCT_NAME"
+        echo "Building for detected config: $PRODUCT_CONF"
         
         export ALLOW_MISSING_DEPENDENCIES=true
         export LC_ALL=C
         
-        # تنفيذ أمر lunch باستخدام الاسم المستخرج
-        lunch ${PRODUCT_NAME}-eng
+        # تنفيذ الغداء (lunch) بناءً على ما وجده النظام
+        lunch ${PRODUCT_CONF}-eng || lunch ${PRODUCT_CONF}-userdebug
         
-        # بدء عملية بناء الريكفري
+        # أمر التجميع النهائي
         mka recoveryimage -j$(nproc)
-
-    - name: Upload Recovery Image
-      uses: actions/upload-artifact@v4
-      with:
-        name: TWRP-Final-Build
-        # استخدام علامة النجمة لرفع أي ملف recovery.img ينتج في مجلد out
-        path: twrp/out/target/product/*/recovery.img
-
-
-    - name: Upload Recovery Image
-      uses: actions/upload-artifact@v4
-      with:
-        name: TWRP-Build-Result
-        # استخدام المتغير للوصول للمسار الصحيح للملف الناتج
-        path: twrp/out/target/product/*/recovery.img
 
 
     - name: Upload Recovery Image
