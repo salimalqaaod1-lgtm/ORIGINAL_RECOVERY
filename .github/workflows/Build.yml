@@ -73,7 +73,8 @@ jobs:
         # (اختياري: يمكنك إضافة المزيد من rm -rf للمجلدات التي تظهر في الخطأ)
         # أضف هذا السطر في الـ Workflow قبل أمر mka
         rm -rf hardware/interfaces
-
+        mkdir -p out/target/product/m7332/obj/SHARED_LIBRARIES/android.hardware.boot@1.0_intermediates/
+        touch out/target/product/m7332/obj/SHARED_LIBRARIES/android.hardware.boot@1.0_intermediates/android.hardware.boot@1.0.so.toc
         # البدء بالبناء
         mka recoveryimage -j$(nproc)
 
