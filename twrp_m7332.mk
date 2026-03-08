@@ -9,7 +9,7 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 PRODUCT_DEVICE := m7332
-PRODUCT_NAME := androidTV
+PRODUCT_NAME := twrp_m7332
 PRODUCT_BRAND := MTK
 PRODUCT_MODEL := Smart tv 
 PRODUCT_MANUFACTURER := mstar
