@@ -47,9 +47,10 @@ jobs:
       run: |
         cd twrp
        
-        
         export ALLOW_MISSING_DEPENDENCIES=true
-        export LC_ALL=C
+          export LC_ALL=C
+          source build/Android.sh
+          
         
         # تنفيذ الغداء (lunch) بناءً على ما وجده النظام
         lunch ${PRODUCT_CONF}-eng || lunch ${PRODUCT_CONF}-userdebug
