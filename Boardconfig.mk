@@ -18,6 +18,11 @@ BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x04000000
 BOARD_TAGS_OFFSET := 0x01000000
+# إخبار نظام البناء باستخدام الكيرنل المرفق
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
+
+# منع النظام من محاولة بناء الكيرنل من السورس
+BOARD_KERNEL_BINARIES := kernel
 
 # Kernel Command Line
 BOARD_KERNEL_CMDLINE := androidboot.boot_devices=mstar_mci.0 buildvariant=userdebug
