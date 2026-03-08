@@ -11,3 +11,6 @@ PRODUCT_COPY_FILES += \
 # Boot Script (تفعيل ملف التشغيل الذي يحتوي على أوامر الـ IR والـ USB)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/init.recovery.m7332.rc:recovery/root/init.recovery.m7332.rc
+
+PRODUCT_COPY_FILES += \
+    device/mediatek/m7332/dtb.img:$(PRODUCT_OUT)/dtb.img
