@@ -1,4 +1,4 @@
-LOCAL_PATH := .
+LOCAL_PATH := device/mediatek/m7332
 
 # Sideband for Remote Control
 PRODUCT_COPY_FILES += \
