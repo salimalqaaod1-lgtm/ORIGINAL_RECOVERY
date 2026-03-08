@@ -58,5 +58,14 @@ TW_EXCLUDE_ENVELOPES := true
 # DTB Configuration
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/dtb.img
 BOARD_INCLUDE_DTB_IN_BOOTIMG := false
+# الكيرنل المرفق (Prebuilt Kernel)
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
+BOARD_PREBUILT_DTBIMAGE := $(DEVICE_PATH)/dtb.img
+
+# إعدادات الـ Boot Image لضمان الإقلاع الصحيح على معالج MT9632
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION) --board $(TARGET_BOARD_PLATFORM)
+
+# دمج ملف الـ DTB داخل صورة الريكفري (ضروري جداً لتعريف الهاردوير)
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 BOARD_VNDK_VERSION := current
