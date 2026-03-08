@@ -55,6 +55,7 @@ TW_NO_SCREEN_TIMEOUT := true
 TW_NO_BATT_PERCENT := true
 TW_EXCLUDE_ENVELOPES := true
 
+
 # DTB Configuration
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/dtb.img
@@ -63,9 +64,6 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $
 # تخطي التحقق من الـ Dependencies المفقودة في أندرويد 11
 BUILD_BROKEN_VNDK_VERSION := true
 BUILD_BROKEN_DUP_RULES := true
-
-# السماح بدمج ملفات ELF الجاهزة دون فحص (ضروري للمكتبات المستخرجة)
+# تعطيل فحص ملفات ELF الجاهزة تماماً
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
-
-# تجاهل الوحدات المفقودة التي لا نستخدمها
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
