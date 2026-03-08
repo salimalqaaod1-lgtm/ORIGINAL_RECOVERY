@@ -1,4 +1,4 @@
-DEVICE_PATH := .
+DEVICE_PATH := device/mediatek/m7332
 
 # Architecture
 TARGET_ARCH := arm
