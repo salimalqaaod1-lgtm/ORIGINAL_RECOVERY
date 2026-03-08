@@ -49,7 +49,7 @@ jobs:
        
         export ALLOW_MISSING_DEPENDENCIES=true
           export LC_ALL=C
-          source build/Android.sh
+          source build/AndroidProducts.mk
           
         
         # تنفيذ الغداء (lunch) بناءً على ما وجده النظام
