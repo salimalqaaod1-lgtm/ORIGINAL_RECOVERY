@@ -10,6 +10,16 @@ define add-prebuilt-lib
     LOCAL_MODULE_TAGS := optional
     include $(PREBUILT_SHARED_LIBRARY)
 endef
+# تعريف ملفات الـ HW الجاهزة
+include $(CLEAR_VARS)
+LOCAL_MODULE := android.hardware.health@2.0-impl-default
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_MODULE_SUFFIX := .so
+# تأكد من هذا المسار بدقة من صورك
+LOCAL_SRC_FILES := recovery/root/system/lib/hw/android.hardware.health@2.0-impl-default.so
+LOCAL_MODULE_TAGS := optional
+include $(PREBUILT_SHARED_LIBRARY)
 
 # تسجيل المكتبات التي ظهرت في صورك ويحتاجها الريكفري بشدة
 $(eval $(call add-prebuilt-lib,android.hardware.boot@1.0))
