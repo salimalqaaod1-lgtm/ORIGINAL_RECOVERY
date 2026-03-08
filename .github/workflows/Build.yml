@@ -1,1 +1,66 @@
+name: Build TWRP Recovery
+
+on:
+  workflow_dispatch: # تشغيل يدوي
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    # ملاحظة: تم اختيار 22.04 لتجنب مشاكل التعليق في الإصدارات الأقدم
+
+    steps:
+    - name: Checkout Your Repository
+      uses: actions/checkout@v4
+
+    - name: Cleanup Space
+      run: |
+        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /opt/ghc
+        sudo apt clean
+
+    - name: Install Build Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y bc build-essential libssl-dev libxml2-utils git zip unzip curl python3 python-is-python3
+
+    - name: Set up Repo Tool
+      run: |
+        mkdir ~/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+        echo "$HOME/bin" >> $GITHUB_PATH
+
+    - name: Sync TWRP Source
+      run: |
+        mkdir twrp
+        cd twrp
+        git config --global user.email "gemini@example.com"
+        git config --global user.name "Gemini-Builder"
+        # تم استخدام --depth=1 لتسريع العملية وتوفير المساحة
+        ~/bin/repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-11 --depth=1
+        ~/bin/repo sync -c -j$(nproc) --no-tags --no-clone-bundle
+
+    - name: Move Device Tree to Source
+      run: |
+        # إنشاء المسار المتوافق مع ملفات الإعداد الخاصة بك
+        mkdir -p twrp/device/mediatek/m7332
+        # نسخ كل الملفات من المستودع إلى مسار البناء
+        cp -r ./* twrp/device/mediatek/m7332/
+        # حذف مجلد الأكشن نفسه من داخل مسار البناء لتجنب التكرار
+        rm -rf twrp/device/mediatek/m7332/.github
+        rm -rf twrp/device/mediatek/m7332/twrp
+
+    - name: Build TWRP
+      run: |
+        cd twrp
+        source build/envsetup.sh
+        export ALLOW_MISSING_DEPENDENCIES=true
+        # استخدام الاسم الذي فضلته twrp_m7332
+        lunch twrp_m7332-eng
+        mka recoveryimage -j$(nproc)
+
+    - name: Upload Recovery Image
+      uses: actions/upload-artifact@v4
+      with:
+        name: TWRP-m7332-Custom
+        path: twrp/out/target/product/m7332/recovery.img
 
