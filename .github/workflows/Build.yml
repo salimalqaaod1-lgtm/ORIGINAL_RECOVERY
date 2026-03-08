@@ -75,7 +75,7 @@ jobs:
         rm -rf hardware/interfaces
         mkdir -p out/target/product/m7332/obj/SHARED_LIBRARIES/android.hardware.boot@1.0_intermediates/
         touch out/target/product/m7332/obj/SHARED_LIBRARIES/android.hardware.boot@1.0_intermediates/android.hardware.boot@1.0.so.toc
-          default; do
+        
           mkdir -p out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/
           touch out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc
            done
