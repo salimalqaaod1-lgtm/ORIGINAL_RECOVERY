@@ -31,11 +31,15 @@ BOARD_KERNEL_CMDLINE := androidboot.boot_devices=mstar_mci.0 buildvariant=userde
 TARGET_BOARD_PLATFORM := mt9632
 TARGET_BOARD_PLATFORM_GPU := mali-g52
 
-# Partitions (Dynamic Partitions Support)
+# Partitions (إعدادات مطابقة تماماً لما ظهر في صور الـ ADB Shell الخاصة بك)
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_SUPER_PARTITION_GROUPS := mstar_dynamic_partitions
-BOARD_MSTAR_DYNAMIC_PARTITIONS_SIZE := 4294967296
+# القيمة التالية تم حسابها من mmcblk0p26 (super)
+BOARD_MSTAR_DYNAMIC_PARTITIONS_SIZE := 2225078272 
 BOARD_MSTAR_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product odm
+
+# تحديد حجم قسم الريكفري لضمان عدم تجاوز المساحة المتاحة (40 ميجابايت)
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
 
 # TWRP Specific Configs
 TW_THEME := landscape_hdpi
