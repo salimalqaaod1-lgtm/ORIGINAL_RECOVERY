@@ -56,18 +56,8 @@ TW_NO_BATT_PERCENT := true
 TW_EXCLUDE_ENVELOPES := true
 
 # DTB Configuration
-# 1. تحديد المسارات
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/dtb.img
-
-# 2. نسخ الملف (تم تصحيح الحرف الناقص هنا)
-PRODUCT_COPY_FILES += \
-    $(TARGET_PREBUILT_DTB):out/target/product/m7332/dtb.img
-
-# 3. إعدادات تجميع الصورة النهائية
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION) --board $(TARGET_BOARD_PLATFORM) --dtb $(TARGET_PREBUILT_DTB)
 
-# 4. أوامر دمج المكونات
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION) --board $(TARGET_BOARD_PLATFORM) --dtb out/target/product/m7332/dtb.img
-
-BOARD_VNDK_VERSION := current
