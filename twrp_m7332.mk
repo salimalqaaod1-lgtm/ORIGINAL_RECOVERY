@@ -6,7 +6,7 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from m7332 device config
 # بما أن ملفاتك في المجلد الرئيسي، نستخدم المسار المباشر
-$(call inherit-product, $(LOCAL_PATH)/device.mk)
+$(call inherit-product,device/mediatek/m7332/device.mk)
 
 PRODUCT_DEVICE := m7332
 PRODUCT_NAME := twrp_m7332
