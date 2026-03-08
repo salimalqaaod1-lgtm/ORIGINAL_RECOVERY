@@ -47,7 +47,7 @@ jobs:
       run: |
         cd twrp
         # التأكد من كتابة مسار ملف envsetup بشكل صحيح
-        source build/vendorsetup.sh
+        source build/envsetup.sh
         
         # البحث عن اسم المنتج تلقائياً من المجلد لضمان البناء مهما كان الاسم
         PRODUCT_CONF=$(find device/mediatek/m7332/ -name "twrp_*.mk" | head -n 1 | xargs basename | cut -d'.' -f1)
