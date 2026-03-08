@@ -58,14 +58,16 @@ jobs:
         source build/envsetup.sh
         
         export MY_PRODUCT="twrp_m7332"
-        
-        # الأوامر السحرية لتجاهل أخطاء VTS و Soong
         export ALLOW_MISSING_DEPENDENCIES=true
+        export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
+        export BUILD_BROKEN_DUP_RULES=true
+        # الأوامر السحرية لتجاهل أخطاء VTS و Soong
+       
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
         
         lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
-        
+        rm -rfhardware/interfaces/automotive
         # قبل البناء، سنقوم بحذف مجلدات الاختبار التي تسبب المشاكل
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
