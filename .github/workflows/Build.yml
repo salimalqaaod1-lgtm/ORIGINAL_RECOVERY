@@ -46,7 +46,8 @@ jobs:
     - name: Build TWRP
       run: |
         cd twrp
-       
+        source build 
+        device/mt9632/m7332/AndroidProducts.mk
         export ALLOW_MISSING_DEPENDENCIES=true
           export LC_ALL=C
           
