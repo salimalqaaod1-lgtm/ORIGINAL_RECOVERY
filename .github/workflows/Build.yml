@@ -53,8 +53,7 @@ jobs:
           
         
         # تنفيذ الغداء (lunch) بناءً على ما وجده النظام
-        lunch ${PRODUCT_CONF}-eng || lunch ${PRODUCT_CONF}-userdebug
-        
+        lunch twrp_m7332-eng || echo "Lunch failed, but trying to continue..."
         # أمر التجميع النهائي
         mka recoveryimage -j$(nproc)
 
