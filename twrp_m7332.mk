@@ -20,10 +20,16 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Specify Architecture for ARM32
 TARGET_ARCH := arm
 
-# هنا المكان الصحيح لإضافة المكتبات الجاهزة التي سجلناها في Android.mk
+# استدعاء ملفات تعريف المنتج الأساسية
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+
+# إضافة المكتبات التي استخرجتها من التلفاز (الموجودة في صورك)
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0 \
     android.hardware.boot@1.1 \
     android.hardware.health@2.0-impl-default \
     libc \
-    libbase
+    libbase \
+    libcutils \
+    liblog
+
