@@ -43,7 +43,7 @@ jobs:
         mkdir -p twrp/device/mediatek/m7332
         cp -r ./* twrp/device/mediatek/m7332/ || true
 
-    -     - name: Build TWRP
+    - name: Build TWRP
       run: |
         cd twrp
         source build/envsetup.sh
