@@ -63,5 +63,16 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $
 # تخطي التحقق من الـ Dependencies المفقودة في أندرويد 11
 BUILD_BROKEN_VNDK_VERSION := true
 BUILD_BROKEN_DUP_RULES := true
+
+# السماح بدمج ملفات ELF الجاهزة دون فحص (ضروري للمكتبات المستخرجة)
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
 
+# تجاهل الوحدات المفقودة التي لا نستخدمها
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+
+# إجبار النظام على استخدام الموديولات المعرفة في Android.mk
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.0 \
+    android.hardware.boot@1.1 \
+    libc \
+    libbase
