@@ -52,8 +52,8 @@ jobs:
         rm -rf twrp/device/mediatek/m7332/.github
         rm -rf twrp/device/mediatek/m7332/.git
 
-        - name: Build TWRP
-        run: |
+    - name: Build TWRP
+      run: |
         cd twrp
         source build/envsetup.sh
         export MY_PRODUCT="twrp_m7332"
