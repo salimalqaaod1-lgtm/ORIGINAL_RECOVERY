@@ -55,19 +55,20 @@ jobs:
     - name: Build TWRP
       run: |
         cd twrp
-        # تفعيل بيئة بناء أندرويد (المسار الصحيح)
         source build/envsetup.sh
         
-        # استخراج اسم المنتج تلقائياً من ملف التعريف لضمان المرونة
-        PRODUCT_CONF=$(grep "COMMON_LUNCH_CHOICES" device/mediatek/m7332/AndroidProducts.mk | cut -d'=' -f2 | awk '{print $1}' | cut -d'-' -f1)
-        echo "The detected product for build is: $PRODUCT_CONF"
+        # استخدام معرف ثابت لتجاوز أخطاء الأسماء
+        export MY_PRODUCT="twrp_m7332"
         
         export ALLOW_MISSING_DEPENDENCIES=true
         export LC_ALL=C
         
-        # اختيار المنتج (lunch) وبدء التجميع
-        lunch ${PRODUCT_CONF}-eng || lunch ${PRODUCT_CONF}-userdebug
+        # تفعيل البناء باستخدام المعرف الثابت
+        lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
+        
+        # أمر البناء الذي سيجمع الكيرنل والملفات التي رفعتها
         mka recoveryimage -j$(nproc)
+
 
     - name: Upload Recovery Image
       uses: actions/upload-artifact@v4
