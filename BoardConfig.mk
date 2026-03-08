@@ -69,10 +69,3 @@ BUILD_BROKEN_PREBUILT_ELF_FILES := true
 
 # تجاهل الوحدات المفقودة التي لا نستخدمها
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
-
-# إجبار النظام على استخدام الموديولات المعرفة في Android.mk
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0 \
-    android.hardware.boot@1.1 \
-    libc \
-    libbase
