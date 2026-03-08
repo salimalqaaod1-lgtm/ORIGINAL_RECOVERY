@@ -1,12 +1,11 @@
 name: Build TWRP Recovery
 
 on:
-  workflow_dispatch: # تشغيل يدوي
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-22.04
-    # ملاحظة: تم اختيار 22.04 لتجنب مشاكل التعليق في الإصدارات الأقدم
 
     steps:
     - name: Checkout Your Repository
@@ -33,34 +32,36 @@ jobs:
       run: |
         mkdir twrp
         cd twrp
-        git config --global user.email "gemini@example.com"
-        git config --global user.name "Gemini-Builder"
-        # تم التغيير إلى مستودع AOSP وفرع twrp-11 الذي تم التأكد من وجوده
+        git config --global user.email "gh-actions@example.com"
+        git config --global user.name "GitHub-Actions"
+        # تم استخدام مستودع AOSP وفرع twrp-11 المتوافق
         ~/bin/repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11 --depth=1
         ~/bin/repo sync -c -j$(nproc) --no-tags --no-clone-bundle
 
     - name: Move Device Tree to Source
       run: |
-        # إنشاء المسار المتوافق مع ملفات الإعداد الخاصة بك
+        # إنشاء مسار الجهاز m7332
         mkdir -p twrp/device/mediatek/m7332
-        # نسخ كل الملفات من المستودع إلى مسار البناء
-        cp -r ./* twrp/device/mediatek/m7332/
-        # حذف مجلد الأكشن نفسه من داخل مسار البناء لتجنب التكرار
+        
+        # النسخ الذكي: استثناء مجلد twrp لتجنب الخطأ الذي ظهر لك
+        # هذا الأمر سينسخ كل ملفات الواجهة ومجلد recovery/root بالكامل
+        find . -maxdepth 1 -not -name 'twrp' -not -name '.' -not -name '..' -not -name '.git' -not -name '.github' -exec cp -r {} twrp/device/mediatek/m7332/ \;
+        
+        # تنظيف ملفات الجيت الزائدة
         rm -rf twrp/device/mediatek/m7332/.github
-        rm -rf twrp/device/mediatek/m7332/twrp
+        rm -rf twrp/device/mediatek/m7332/.git
 
     - name: Build TWRP
       run: |
         cd twrp
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        # استخدام الاسم الذي فضلته twrp_m7332
+        # البناء باستخدام الاسم الذي حددته في vendorsetup
         lunch twrp_m7332-eng
         mka recoveryimage -j$(nproc)
 
     - name: Upload Recovery Image
       uses: actions/upload-artifact@v4
       with:
-        name: TWRP-m7332-Custom
+        name: TWRP-m7332-Build
         path: twrp/out/target/product/m7332/recovery.img
-
