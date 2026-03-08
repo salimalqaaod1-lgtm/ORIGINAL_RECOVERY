@@ -71,6 +71,8 @@ jobs:
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
         # (اختياري: يمكنك إضافة المزيد من rm -rf للمجلدات التي تظهر في الخطأ)
+        # أضف هذا السطر في الـ Workflow قبل أمر mka
+        rm -rf hardware/interfaces
 
         # البدء بالبناء
         mka recoveryimage -j$(nproc)
