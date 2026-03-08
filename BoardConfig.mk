@@ -67,3 +67,5 @@ BUILD_BROKEN_DUP_RULES := true
 # تعطيل فحص ملفات ELF الجاهزة تماماً
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+# إخبار النظام أن المجلدات مستخرجة وجاهزة
+BOARD_ROOT_EXTRA_FOLDERS := bin etc lib
