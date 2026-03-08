@@ -67,8 +67,7 @@ jobs:
         export SELINUX_IGNORE_NEVERALLOWS=true
         
         lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
-        rm -rfhardware/interfaces/automotive
-        # قبل البناء، سنقوم بحذف مجلدات الاختبار التي تسبب المشاكل
+        rm -rf hardware/interfaces/automotive
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
         # (اختياري: يمكنك إضافة المزيد من rm -rf للمجلدات التي تظهر في الخطأ)
