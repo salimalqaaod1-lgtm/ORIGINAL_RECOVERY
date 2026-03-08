@@ -48,20 +48,28 @@ jobs:
         cd twrp
         source build/envsetup.sh
         
-         AndroidProducts.mk
-         COMMON_LUNCH_CHOICES
-        export PRODUCT_NAME=$(grep "COMMON_LUNCH_CHOICES :=" ../AndroidProducts.mk | awk '{print $3}' | cut -d'-' -f1)
+        # قراءة اسم المنتج من الملف بدون تشغيله كأمر
+        # سيقوم بالبحث عن السطر COMMON_LUNCH_CHOICES ويستخلص الاسم منه
+        PRODUCT_NAME=$(grep "COMMON_LUNCH_CHOICES" ../AndroidProducts.mk | cut -d'=' -f2 | awk '{print $1}' | cut -d'-' -f1)
         
-        echo "Detected Product Name: $PRODUCT_NAME"
+        echo "The detected product is: $PRODUCT_NAME"
         
         export ALLOW_MISSING_DEPENDENCIES=true
         export LC_ALL=C
         
-        lunch
+        # تنفيذ أمر lunch باستخدام الاسم المستخرج
         lunch ${PRODUCT_NAME}-eng
         
-       
+        # بدء عملية بناء الريكفري
         mka recoveryimage -j$(nproc)
+
+    - name: Upload Recovery Image
+      uses: actions/upload-artifact@v4
+      with:
+        name: TWRP-Final-Build
+        # استخدام علامة النجمة لرفع أي ملف recovery.img ينتج في مجلد out
+        path: twrp/out/target/product/*/recovery.img
+
 
     - name: Upload Recovery Image
       uses: actions/upload-artifact@v4
