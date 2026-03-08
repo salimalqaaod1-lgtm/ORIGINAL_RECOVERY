@@ -46,12 +46,7 @@ jobs:
     - name: Build TWRP
       run: |
         cd twrp
-        source build/envsetup.sh
-        
-        # أمر ذكي للبحث عن أي ملف إعداد منتج متاح وتحديده تلقائياً
-        PRODUCT_CONF=$(find device/mediatek/m7332/ -name "twrp_*.mk" | head -n 1 | xargs basename | cut -d'.' -f1)
-        
-        echo "Building for detected config: $PRODUCT_CONF"
+       
         
         export ALLOW_MISSING_DEPENDENCIES=true
         export LC_ALL=C
