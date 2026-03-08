@@ -6,7 +6,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
-TARGET_USES_64_BIT_BINDER := true
+TARGET_USES_64_BIT_BINDER := false 
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := m7332,MT9632
@@ -56,23 +56,18 @@ TW_NO_BATT_PERCENT := true
 TW_EXCLUDE_ENVELOPES := true
 
 # DTB Configuration
-# 1. تحديد المسارات (تأكد أن الملفات بنفس هذه الأسماء في مستودعك)
+# 1. تحديد المسارات
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/dtb.img
-ODUCT_COPY_FILES += \
+
+# 2. نسخ الملف (تم تصحيح الحرف الناقص هنا)
+PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_DTB):out/target/product/m7332/dtb.img
 
 # 3. إعدادات تجميع الصورة النهائية
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_BOOTIMG_HEADER_VERSION := 2
 
-# 4. أوامر دمج المكونات (تأكد من كتابتها في سطر واحد)
+# 4. أوامر دمج المكونات
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION) --board $(TARGET_BOARD_PLATFORM) --dtb out/target/product/m7332/dtb.img
-
-# إعدادات الـ Boot Image لضمان الإقلاع الصحيح على معالج MT9632
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION) --board $(TARGET_BOARD_PLATFORM)
-
-# دمج ملف الـ DTB داخل صورة الريكفري (ضروري جداً لتعريف الهاردوير)
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 BOARD_VNDK_VERSION := current
