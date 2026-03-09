@@ -45,17 +45,3 @@ cc_prebuilt_library_shared {
     compile_multilib: "32",
     recovery_available: true,
 }
-
-// 4. تعريف واجهات Keymaster (إذا كانت موجودة كملفات .so لديك)
-cc_prebuilt_library_shared {
-    name: "android.hardware.keymaster@4.0",
-    owner: "mtk",
-    strip: { none: true },
-    target: {
-        android_arm: {
-            srcs: ["android.hardware.keymaster@4.0.so"],
-        },
-    },
-    compile_multilib: "32",
-    recovery_available: true,
-}
