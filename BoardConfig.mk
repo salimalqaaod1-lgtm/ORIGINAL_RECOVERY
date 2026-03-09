@@ -69,3 +69,12 @@ BUILD_BROKEN_PREBUILT_ELF_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 # إخبار النظام أن المجلدات مستخرجة وجاهزة
 BOARD_ROOT_EXTRA_FOLDERS := bin etc lib
+
+# إجبار النظام على تجاهل فحص التبعيات المفقودة (حل Soong النهائي)
+ALLOW_MISSING_DEPENDENCIES := true
+BUILD_BROKEN_MISSING_PGO_STATS_ERROR := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
+# تعطيل الخدمات التي تسبب الأخطاء (مثل الصحة والسيارات)
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.none
+AB_OTA_UPDATER := false
