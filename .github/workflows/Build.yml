@@ -165,7 +165,7 @@ jobs:
         done
        
         # 3. إخبار النظام بأننا لا نملك واجهة صحة (Health HAL)
-        export TW_NO_BATTERY_PERCENT := true
+        
         export ALLOW_MISSING_DEPENDENCIES=true
 
         make recoveryimage -j$(nproc) || make recoveryimage -j1
