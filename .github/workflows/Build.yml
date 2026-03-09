@@ -62,7 +62,7 @@ jobs:
         export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
         export BUILD_BROKEN_DUP_RULES=true
          mv bootable/recovery/minadbd/Android.bp bootable/recovery/minadbd/Android.bp.bak   
-               sed -i 's/"minadbd"//g' bootable/recovery/Android.bp    
+                   
                # 1. تعطيل الاعتماد على health داخل سورس الريكفري نفسه
         # سنقوم بتبديل طلب libhealthhalutils بمكتبة فارغة أو حذفه من ملف الإعداد
         sed -i 's/"libhealthhalutils"//g' bootable/recovery/minadbd/Android.bp
