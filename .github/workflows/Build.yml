@@ -93,7 +93,9 @@ jobs:
         }
         EOF
 
-        
+        mkdir -p hardware/interfaces/health/utils/libhealthhalutils/include/healthhalutils/
+        touch hardware/interfaces/health/utils/libhealthhalutils/include/healthhalutils/HealthHalUtils.h
+
         rm -rf system/tools/hidl/test
         rm -rf hardware/interfaces
         rm -rf frameworks/hardware/interfaces
