@@ -61,8 +61,7 @@ jobs:
         export ALLOW_MISSING_DEPENDENCIES=true
         export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
         export BUILD_BROKEN_DUP_RULES=true
-         mv bootable/recovery/minadbd/Android.bp bootable/recovery/minadbd/Android.bp.bak   
-                   
+       
                # 1. تعطيل الاعتماد على health داخل سورس الريكفري نفسه
         # سنقوم بتبديل طلب libhealthhalutils بمكتبة فارغة أو حذفه من ملف الإعداد
         sed -i 's/"libhealthhalutils"//g' bootable/recovery/minadbd/Android.bp
@@ -164,20 +163,16 @@ jobs:
           # إنشاء ملف .a وهمي (Empty Archive)
           ar rcs "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/${lib}.a"
         done
-        # 2. حذف الاستدعاءات البرمجية داخل كود C++ لكي لا يحدث خطأ أثناء الربط
-        # سنقوم بتعطيل الأسطر التي تحاول استخدام وظائف الصحة
-        sed -i 's/health::/ \/\/ health::/g' bootable/recovery/minadbd/minadbd_services.cpp
-        
+       
         # 3. إخبار النظام بأننا لا نملك واجهة صحة (Health HAL)
         export TW_NO_BATTERY_PERCENT := true
         export ALLOW_MISSING_DEPENDENCIES=true
 
         make recoveryimage -j$(nproc) || make recoveryimage -j1
-
-
-    - name: Upload Recovery Image
-      uses: actions/upload-artifact@v4
-      with:
+         
+         - name: Upload Recovery Image
+        uses: actions/upload-artifact@v4
+        with:
         name: TWRP-m7332-Final-Result
         # رفع ملف الـ recovery.img الناتج مهما كان اسم المجلد الفرعي
         path: twrp/out/target/product/*/recovery.img
