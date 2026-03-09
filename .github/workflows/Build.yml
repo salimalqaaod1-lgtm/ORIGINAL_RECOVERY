@@ -61,12 +61,21 @@ jobs:
         export ALLOW_MISSING_DEPENDENCIES=true
         export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
         export BUILD_BROKEN_DUP_RULES=true
-       
-               # 1. تعطيل الاعتماد على health داخل سورس الريكفري نفسه
-        # سنقوم بتبديل طلب libhealthhalutils بمكتبة فارغة أو حذفه من ملف الإعداد
+        export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
+        export SELINUX_IGNORE_NEVERALLOWS=true
+        export LC_ALL=C
+        
+        rm -rf out/soong/.intermediates/bootable/recovery/minadbd
+        rm -rf out/soong/.intermediates/bootable/recovery
+        rm -rf out/soong/.bootstrap
+
         sed -i 's/"libhealthhalutils"//g' bootable/recovery/minadbd/Android.bp
         sed -i 's/"android.hardware.health@2.0"//g' bootable/recovery/minadbd/Android.bp
-        
+       
+        find system/core system/tools hardware/interfaces -name "Android.bp" -path "*/tests/*" -exec mv {} {}.bak \;
+        find system/core system/tools hardware/interfaces -name "Android.mk" -path "*/tests/*" -exec mv {} {}.bak \;
+        find system/security/keystore -name "Android.bp" -exec mv {} {}.bak \;
+        find system/core/trusty -name "Android.bp" -exec mv {} {}.bak \;
         # 2. تزوير تعريف الوحدة داخل Soong (هذا هو الأهم)
         # سنقوم بإنشاء ملف Android.bp وهمي في مجلد جديد ليعرف Soong أن هذه الوحدات "موجودة"
         mkdir -p hardware/interfaces/health/2.0/dummy
@@ -85,16 +94,11 @@ jobs:
         EOF
 
         # 3. تنظيف مخرجات Soong القديمة لإجباره على إعادة فحص الملفات الجديدة
-        rm -rf out/soong/.intermediates/bootable/recovery/minadbd
-
+       
         # الأوامر السحرية لتجاهل أخطاء VTS و Soong
-        find system/core system/tools hardware/interfaces -name "Android.bp" -path "*/tests/*" -exec mv {} {}.bak \;
-        find system/core system/tools hardware/interfaces -name "Android.mk" -path "*/tests/*" -exec mv {} {}.bak \;
-        find system/security/keystore -name "Android.bp" -exec mv {} {}.bak \;
-        find system/core/trusty -name "Android.bp" -exec mv {} {}.bak \;
+        
         rm -rf system/tools/hidl/test
-        export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
-        export SELINUX_IGNORE_NEVERALLOWS=true
+        
         rm -rf hardware/interfaces
         rm -rf frameworks/hardware/interfaces
         rm -rf hardware/interfaces/automotive
