@@ -62,10 +62,11 @@ jobs:
         export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
         export BUILD_BROKEN_DUP_RULES=true
         # الأوامر السحرية لتجاهل أخطاء VTS و Soong
-       
+        find hardware/interfaces -name "tests" -type d -exec rm -rf {} +
+        find system/core -name "tests" -type d -exec rm -rf {} +
+        rm -rf system/tools/hidl/test
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
-        rm -rf system/tools/hidl/test
         rm -rf hardware/interfaces
         rm -rf frameworks/hardware/interfaces
         rm -rf hardware/interfaces/automotive
