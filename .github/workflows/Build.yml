@@ -66,6 +66,7 @@ jobs:
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
         rm -rf hardware/interfaces
+        rm -rf frameworks/hardware/interfaces
         rm -rf hardware/interfaces/automotive
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
