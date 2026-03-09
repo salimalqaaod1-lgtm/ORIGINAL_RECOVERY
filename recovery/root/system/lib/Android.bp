@@ -31,3 +31,28 @@ cc_prebuilt_library_shared {
     compile_multilib: "32",
     recovery_available: true,
 }
+cc_prebuilt_library_shared {
+    name: "android.hardware.boot@1.1",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["android.hardware.boot@1.1.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "android.hardware.health@2.0",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["android.hardware.health@2.0.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
