@@ -65,12 +65,13 @@ jobs:
        
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
-        
-        lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
         rm -rf hardware/interfaces
         rm -rf hardware/interfaces/automotive
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
+
+        lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
+        
        
         
        
