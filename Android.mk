@@ -24,4 +24,5 @@ $(eval $(call add-prebuilt-lib,libutils))
 $(eval $(call add-prebuilt-lib,libcrypto))
 $(eval $(call add-prebuilt-lib,libm))
 $(eval $(call add-prebuilt-lib,libz))
+
 LOCAL_CHECK_ELF_FILES := false
