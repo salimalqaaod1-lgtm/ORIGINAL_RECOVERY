@@ -124,9 +124,21 @@ jobs:
           mkdir -p "out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/"
           touch "out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc"
         done
+        
+        for lib in "android.hardware.health@2.0" "android.hardware.health@1.0" "libhealthservice"; do
+          mkdir -p "out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/"
+          touch "out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc"
+        done
 
                 # 1. تزوير المكتبات الساكنة (Static) المطلوبة لـ minadbd
         for lib in "libhealthhalutils" "libhealthstoragedefault"; do
+          # إنشاء المسار للنسخة الساكنة (Static)
+          mkdir -p "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/"
+          # إنشاء ملف .a وهمي (Empty Archive)
+          ar rcs "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/${lib}.a"
+        done
+         
+         for lib in "libhealthhalutils" "libhealthstoragedefault"; do
           # إنشاء المسار للنسخة الساكنة (Static)
           mkdir -p "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/"
           # إنشاء ملف .a وهمي (Empty Archive)
