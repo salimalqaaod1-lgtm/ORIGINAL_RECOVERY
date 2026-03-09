@@ -1,0 +1,61 @@
+// 1. تعريف مكتبة الصحة (التي سببت الخطأ الأخير)
+cc_prebuilt_library_shared {
+    name: "android.hardware.health@2.0",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["android.hardware.health@2.0.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
+
+// 2. تزوير المكتبة الساكنة المفقودة ليرضى عنها موديول minadbd
+cc_library_static {
+    name: "libhealthhalutils",
+    recovery_available: true,
+    srcs: [],
+}
+
+// 3. تعريف مكتبات التشفير والحماية (Prebuilt)
+cc_prebuilt_library_shared {
+    name: "libfscrypt",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["libfscrypt.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libkeymaster_messages",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["libkeymaster_messages.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
+
+// 4. تعريف واجهات Keymaster (إذا كانت موجودة كملفات .so لديك)
+cc_prebuilt_library_shared {
+    name: "android.hardware.keymaster@4.0",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["android.hardware.keymaster@4.0.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
