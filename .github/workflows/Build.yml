@@ -164,11 +164,6 @@ jobs:
           # إنشاء ملف .a وهمي (Empty Archive)
           ar rcs "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/${lib}.a"
         done
-        # 1. حذف طلب مكتبات الصحة من ملف إعداد minadbd تماماً
-        # هذا الأمر سيبحث عن السطور التي تحتوي على التبعيات ويحذفها
-        sed -i '/"libhealthhalutils"/d' bootable/recovery/minadbd/Android.bp
-        sed -i '/"android.hardware.health@2.0"/d' bootable/recovery/minadbd/Android.bp
-        
         # 2. حذف الاستدعاءات البرمجية داخل كود C++ لكي لا يحدث خطأ أثناء الربط
         # سنقوم بتعطيل الأسطر التي تحاول استخدام وظائف الصحة
         sed -i 's/health::/ \/\/ health::/g' bootable/recovery/minadbd/minadbd_services.cpp
