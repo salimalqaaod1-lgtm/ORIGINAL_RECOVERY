@@ -6,7 +6,7 @@ define add-prebuilt-lib
     LOCAL_MODULE_CLASS := SHARED_LIBRARIES
     LOCAL_MODULE_SUFFIX := .so
     LOCAL_SRC_FILES := recovery/root/system/lib/$(1).so
-    LOCAL_CHECK_ELF_FILES := false
+    
     LOCAL_MODULE_TAGS := optional
     include $(PREBUILT_SHARED_LIBRARY)
 endef
@@ -24,4 +24,4 @@ $(eval $(call add-prebuilt-lib,libutils))
 $(eval $(call add-prebuilt-lib,libcrypto))
 $(eval $(call add-prebuilt-lib,libm))
 $(eval $(call add-prebuilt-lib,libz))
-
+LOCAL_CHECK_ELF_FILES := false
