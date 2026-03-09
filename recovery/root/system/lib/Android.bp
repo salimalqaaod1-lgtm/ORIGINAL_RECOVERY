@@ -12,6 +12,10 @@ cc_prebuilt_library_shared {
     recovery_available: true,
 }
 
-
+cc_library_static {
+    name: "libhealthhalutils",
+    recovery_available: true,
+    srcs: [],
+}
 
 
