@@ -4,12 +4,11 @@ DEVICE_PATH := device/mediatek/m7332
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 TARGET_USES_64_BIT_BINDER := false 
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := m7332,MT9632
+TARGET_OTA_ASSERT_DEVICE := all
 
 # Kernel Data from Unpack
 BOARD_KERNEL_PAGESIZE := 2048
@@ -50,9 +49,8 @@ TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 150
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_SUPPORT_USB_OTG := true
-
+TARGET_SCREEN_DENSITY := 220
 TW_NO_SCREEN_TIMEOUT := true
-TW_NO_BATT_PERCENT := true
 TW_EXCLUDE_ENVELOPES := true
 
 
@@ -67,27 +65,17 @@ BUILD_BROKEN_DUP_RULES := true
 # تعطيل فحص ملفات ELF الجاهزة تماماً
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
-# إخبار النظام أن المجلدات مستخرجة وجاهزة
-BOARD_ROOT_EXTRA_FOLDERS := bin etc lib
 
 # إجبار النظام على تجاهل فحص التبعيات المفقودة (حل Soong النهائي)
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_MISSING_PGO_STATS_ERROR := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 # تحويل البناء إلى وضع Minimal TWRP
-TARGET_RECOVERY_DEVICE_MODULES := 
 TW_EXCLUDE_ENCRYPTED_BACKUPS := true
 TW_EXCLUDE_QUOTAS := true
 TW_NO_BATTERY_PERCENT := true
-
-# منع النظام من محاولة بناء fastbootd من السورس
-  BUILD_BROKEN_MISSING_PGO_STATS_ERROR := true
-  ALLOW_MISSING_DEPENDENCIES := true
   TW_INCLUDE_CRYPTO := false
   TW_EXCLUDE_ENCRYPTED_BACKUPS := true
 
 TW_INCLUDE_CRYPTO_FBE := false
-TW_NO_BATTERY_PERCENT := true
-
-
   AB_OTA_UPDATER := false
