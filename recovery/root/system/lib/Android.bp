@@ -19,3 +19,15 @@ cc_library_static {
 }
 
 
+cc_prebuilt_library_shared {
+    name: "android.hardware.boot@1.0",
+    owner: "mtk",
+    strip: { none: true },
+    target: {
+        android_arm: {
+            srcs: ["android.hardware.boot@1.0.so"],
+        },
+    },
+    compile_multilib: "32",
+    recovery_available: true,
+}
