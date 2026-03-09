@@ -71,6 +71,8 @@ jobs:
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
         rm -rf system/core/healthd
+        rm -rf system/core/fastboot 
+        rm -rf system/core/fastbootd 
         rm -rf device/mediatek/common
         lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
         
