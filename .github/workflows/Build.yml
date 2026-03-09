@@ -67,12 +67,13 @@ jobs:
         export SELINUX_IGNORE_NEVERALLOWS=true
         
         lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
+        rm -rf hardware/interfaces
         rm -rf hardware/interfaces/automotive
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
-        # (اختياري: يمكنك إضافة المزيد من rm -rf للمجلدات التي تظهر في الخطأ)
-        # أضف هذا السطر في الـ Workflow قبل أمر mka
-        rm -rf hardware/interfaces
+       
+        
+       
         for lib in android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.health@2.0-impl-default; do
           mkdir -p out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/
           touch out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc
