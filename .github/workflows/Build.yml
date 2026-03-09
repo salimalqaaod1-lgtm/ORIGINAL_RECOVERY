@@ -52,7 +52,7 @@ jobs:
         rm -rf twrp/device/mediatek/m7332/.github
         rm -rf twrp/device/mediatek/m7332/.git
 
-    - name: Build TWRP
+    - name: Build Minimal TWRP
       run: |
         cd twrp
         source build/envsetup.sh
@@ -65,6 +65,7 @@ jobs:
        
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
+        rm -rf system/tools/hidl/test
         rm -rf hardware/interfaces
         rm -rf frameworks/hardware/interfaces
         rm -rf hardware/interfaces/automotive
@@ -74,9 +75,9 @@ jobs:
         rm -rf system/core/fastboot 
         rm -rf system/core/fastbootd 
         rm -rf device/mediatek/common
-        lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
+        lunch twrp_m7332-eng || lunch twrp_m7332-userdebug
         
-       
+
         
        
         for lib in android.hardware.boot@1.0 android.hardware.boot@1.1 \
