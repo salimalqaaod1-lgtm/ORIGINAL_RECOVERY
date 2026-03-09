@@ -70,13 +70,22 @@ jobs:
         rm -rf hardware/interfaces/automotive
         rm -rf hardware/interfaces/audio
         rm -rf hardware/interfaces/camera
-
+        rm -rf system/core/healthd
+        rm -rf device/mediatek/common
         lunch ${MY_PRODUCT}-eng || lunch ${MY_PRODUCT}-userdebug
         
        
         
        
-        for lib in android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.health@2.0-impl-default; do
+        for lib in android.hardware.boot@1.0 android.hardware.boot@1.1 \
+                   android.hardware.health@2.0-impl-default \
+                   android.hardware.health@2.0 \
+                   android.hardware.health@1.0-convert \
+                   libhealthservice libhealthstoragedefault \
+                   android.hardware.graphics.common@1.0 \
+                   android.hardware.graphics.common@1.1 \
+                   android.hardware.graphics.common@1.2 \
+                   android.hardware.graphics.bufferqueue@2.0; do
           mkdir -p out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/
           touch out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc
         done
