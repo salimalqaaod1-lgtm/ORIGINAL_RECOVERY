@@ -62,8 +62,8 @@ jobs:
         export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
         export BUILD_BROKEN_DUP_RULES=true
         # الأوامر السحرية لتجاهل أخطاء VTS و Soong
-        find hardware/interfaces -name "tests" -type d -exec rm -rf {} +
-        find system/core -name "tests" -type d -exec rm -rf {} +
+        find system/core system/tools hardware/interfaces -name "Android.bp" -path "*/tests/*" -exec mv {} {}.bak \;
+        find system/core system/tools hardware/interfaces -name "Android.mk" -path "*/tests/*" -exec mv {} {}.bak \;
         rm -rf system/tools/hidl/test
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
@@ -94,7 +94,7 @@ jobs:
           touch out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc
         done
         
-       
+        export ALLOW_MISSING_DEPENDENCIES=true
 
         make recoveryimage -j$(nproc) || make recoveryimage -j1
 
