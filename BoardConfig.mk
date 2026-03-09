@@ -83,6 +83,8 @@ TW_NO_BATTERY_PERCENT := true
 # منع النظام من محاولة بناء fastbootd من السورس
   BUILD_BROKEN_MISSING_PGO_STATS_ERROR := true
   ALLOW_MISSING_DEPENDENCIES := true
+  TW_INCLUDE_CRYPTO := false
+  TW_EXCLUDE_ENCRYPTED_BACKUPS := true
 
 
-AB_OTA_UPDATER := false
+  AB_OTA_UPDATER := false
