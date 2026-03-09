@@ -61,6 +61,8 @@ jobs:
         export ALLOW_MISSING_DEPENDENCIES=true
         export BUILD_BROKEN_MISSING_PGO_STATS_ERROR=true
         export BUILD_BROKEN_DUP_RULES=true
+         mv bootable/recovery/minadbd/Android.bp bootable/recovery/minadbd/Android.bp.bak   
+               sed -i 's/"minadbd"//g' bootable/recovery/Android.bp    
                # 1. تعطيل الاعتماد على health داخل سورس الريكفري نفسه
         # سنقوم بتبديل طلب libhealthhalutils بمكتبة فارغة أو حذفه من ملف الإعداد
         sed -i 's/"libhealthhalutils"//g' bootable/recovery/minadbd/Android.bp
@@ -69,16 +71,15 @@ jobs:
         # 2. تزوير تعريف الوحدة داخل Soong (هذا هو الأهم)
         # سنقوم بإنشاء ملف Android.bp وهمي في مجلد جديد ليعرف Soong أن هذه الوحدات "موجودة"
         mkdir -p hardware/interfaces/health/2.0/dummy
-        cat <<EOF > hardware/interfaces/health/2.0/dummy/Android.bp
+        mkdir -p hardware/interfaces/health/2.0/default
+        cat <<EOF > hardware/interfaces/health/2.0/default/Android.bp
         cc_library_static {
             name: "libhealthhalutils",
-            vendor_available: true,
             recovery_available: true,
             srcs: [],
         }
         cc_library_shared {
             name: "android.hardware.health@2.0",
-            vendor_available: true,
             recovery_available: true,
             srcs: [],
         }
