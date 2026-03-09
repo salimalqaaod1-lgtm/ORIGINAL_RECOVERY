@@ -55,7 +55,7 @@ jobs:
     - name: Build Minimal TWRP
       run: |
         cd twrp
-        source build/envsetup.sh
+        
         
         export MY_PRODUCT="twrp_m7332"
         export ALLOW_MISSING_DEPENDENCIES=true
@@ -93,12 +93,8 @@ jobs:
         }
         EOF
 
-        # 3. تنظيف مخرجات Soong القديمة لإجباره على إعادة فحص الملفات الجديدة
-       
-        # الأوامر السحرية لتجاهل أخطاء VTS و Soong
         
         rm -rf system/tools/hidl/test
-        
         rm -rf hardware/interfaces
         rm -rf frameworks/hardware/interfaces
         rm -rf hardware/interfaces/automotive
@@ -108,9 +104,10 @@ jobs:
         rm -rf system/core/fastboot 
         rm -rf system/core/fastbootd 
         rm -rf device/mediatek/common
+        
+        source build/envsetup.sh
         lunch twrp_m7332-eng || lunch twrp_m7332-userdebug
-       
-                # تصحيح حلقة التزوير: وضعنا علامات اقتباس وأزلنا المسافات الخاطئة
+                
         for lib in \
           "android.hardware.boot@1.0" \
           "android.hardware.boot@1.1" \
@@ -150,7 +147,6 @@ jobs:
           "android.hardware.graphics.common@1.1" \
           "android.hardware.graphics.common@1.2" \
           "android.hardware.graphics.bufferqueue@2.0"; do
-          
           mkdir -p "out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/"
           touch "out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc"
         done
@@ -162,15 +158,9 @@ jobs:
         done
          
          for lib in "libhealthhalutils" "libhealthstoragedefault"; do
-          # إنشاء المسار للنسخة الساكنة (Static)
           mkdir -p "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/"
-          # إنشاء ملف .a وهمي (Empty Archive)
           ar rcs "out/target/product/m7332/obj/STATIC_LIBRARIES/${lib}_intermediates/${lib}.a"
         done
-       
-        # 3. إخبار النظام بأننا لا نملك واجهة صحة (Health HAL)
-        
-        export ALLOW_MISSING_DEPENDENCIES=true
 
         make recoveryimage -j$(nproc) || make recoveryimage -j1
          
@@ -178,5 +168,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
         name: TWRP-m7332-Final-Result
-        # رفع ملف الـ recovery.img الناتج مهما كان اسم المجلد الفرعي
         path: twrp/out/target/product/*/recovery.img
