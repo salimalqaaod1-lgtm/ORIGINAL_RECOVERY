@@ -64,6 +64,8 @@ jobs:
         # الأوامر السحرية لتجاهل أخطاء VTS و Soong
         find system/core system/tools hardware/interfaces -name "Android.bp" -path "*/tests/*" -exec mv {} {}.bak \;
         find system/core system/tools hardware/interfaces -name "Android.mk" -path "*/tests/*" -exec mv {} {}.bak \;
+        find system/security/keystore -name "Android.bp" -exec mv {} {}.bak \;
+        find system/core/trusty -name "Android.bp" -exec mv {} {}.bak \;
         rm -rf system/tools/hidl/test
         export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
         export SELINUX_IGNORE_NEVERALLOWS=true
@@ -90,6 +92,16 @@ jobs:
           "libhealthservice" \
           "libhealthstoragedefault" \
           "libcryptfs" \
+         "android.hardware.confirmationui@1.0" \
+          "android.hardware.keymaster@3.0" \
+          "android.hardware.keymaster@4.0" \
+          "android.hardware.keymaster@4.1" \
+          "libkeymaster4support" \
+          "libkeymaster4_1support" \
+          "libkeymaster_messages" \
+          "libkeystore_aidl" \
+          "libkeystore_binder" \
+          "libkeystore_parcelables" \
           "libkeymaster_messages" \
           "libsoftkeymasterdevice" \
           "libkeymaster_portable" \
