@@ -85,6 +85,7 @@ jobs:
                    android.hardware.health@2.0-impl-default \
                    android.hardware.health@2.0 \
                    android.hardware.health@1.0-convert \
+                   libopenaes libfscrypt \
                    libhealthservice libhealthstoragedefault \
                    android.hardware.graphics.common@1.0 \
                    android.hardware.graphics.common@1.1 \
