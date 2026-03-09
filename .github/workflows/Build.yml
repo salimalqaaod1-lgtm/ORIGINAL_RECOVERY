@@ -71,7 +71,8 @@ jobs:
 
         sed -i 's/"libhealthhalutils"//g' bootable/recovery/minadbd/Android.bp
         sed -i 's/"android.hardware.health@2.0"//g' bootable/recovery/minadbd/Android.bp
-       
+        sed -i '/healthhalutils\/HealthHalUtils.h/d' bootable/recovery/recovery_utils/battery_utils.cpp
+
         find system/core system/tools hardware/interfaces -name "Android.bp" -path "*/tests/*" -exec mv {} {}.bak \;
         find system/core system/tools hardware/interfaces -name "Android.mk" -path "*/tests/*" -exec mv {} {}.bak \;
         find system/security/keystore -name "Android.bp" -exec mv {} {}.bak \;
