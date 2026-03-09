@@ -84,9 +84,6 @@ jobs:
                    android.hardware.health@1.0-convert \
                    libopenaes libfscrypt \
                    libhealthservice libhealthstoragedefault \
-                   android.hardware.graphics.common@1.0 \
-                   android.hardware.graphics.common@1.1 \
-                   android.hardware.graphics.common@1.2 \
                    libopenaes libfscrypt libcryptfs libkeymaster_messages \
                    libsoftkeymasterdevice libkeymaster_portable libkeymaster_staging \
                    libdm_user libfs_mgr_binder libsnapshot_nobinder \
@@ -96,6 +93,9 @@ jobs:
                    android.hardware.keymaster@4.1 \
                    libkeymaster4support libkeymaster4_1support \
                    android.hardware.tests.baz@1.0_interface \  
+                   android.hardware.graphics.common@1.0 \
+                   android.hardware.graphics.common@1.1 \
+                   android.hardware.graphics.common@1.2 \
                    android.hardware.graphics.bufferqueue@2.0; do
           mkdir -p out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/
           touch out/target/product/m7332/obj/SHARED_LIBRARIES/${lib}_intermediates/${lib}.so.toc
