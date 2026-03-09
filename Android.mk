@@ -14,7 +14,7 @@ endef
 # مكتبات النظام الأساسية التي تظهر في صورك
 $(eval $(call add-prebuilt-lib,android.hardware.boot@1.0))
 $(eval $(call add-prebuilt-lib,android.hardware.boot@1.1))
-$(eval $(call add-prebuilt-lib,android.hardware.health@2.0-impl-default))
+# $(eval $(call add-prebuilt-lib,android.hardware.health@2.0-impl-default))
 $(eval $(call add-prebuilt-lib,libc))
 $(eval $(call add-prebuilt-lib,libbase))
 $(eval $(call add-prebuilt-lib,libcutils))
