@@ -30,13 +30,20 @@ jobs:
           # حل مشكلة libtinfo.so.5 يدوياً
           sudo ln -sf /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
 
-      - name: Set up Repo Tool
-        run: |
+            - name: Set up Repo Tool
+           run: |
+          # إنشاء مجلد الأدوات
           mkdir -p ~/bin
+          
+          # تحميل أداة Repo من مستودعات جوجل الرسمية
           curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          
+          # إعطاء صلاحيات التنفيذ
           chmod a+x ~/bin/repo
-          echo "PATH=$HOME/bin:$PATH" >> $GITHUB_ENV
-
+          
+          # ربط الأداة بالنظام ليتم التعرف عليها في أي مكان
+          sudo ln -sf ~/bin/repo /usr/bin/repo
+          
       - name: Sync TWRP 9.0 Source
         run: |
           export PATH=~/bin:$PATH
