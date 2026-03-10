@@ -131,7 +131,21 @@ jobs:
         rm -rf system/core/fastboot 
         rm -rf system/core/fastbootd 
         rm -rf device/mediatek/common
-        
+        # حذف مجلدات تعريفات الهاتف التي تسبب أخطاء
+        rm -rf hardware/interfaces/health
+        rm -rf hardware/interfaces/biometrics
+        rm -rf hardware/interfaces/telephony
+
+        # تزوير ملف الصحة لتجنب خطأ المترجم (Stubbing)
+        mkdir -p hardware/interfaces/health/2.0/default/
+        cat <<EOF > hardware/interfaces/health/2.0/default/Android.bp
+        cc_library_shared {
+        name: "android.hardware.health@2.0",
+        recovery_available: true,
+        srcs: [],
+        }
+        EOF
+
         source build/envsetup.sh
         lunch twrp_m7332-eng || lunch twrp_m7332-userdebug
                 
