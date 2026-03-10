@@ -9,7 +9,7 @@ $(call inherit-product, vendor/omni/config/common.mk)
 $(call inherit-product,device/mediatek/m7332/device.mk)
 
 PRODUCT_DEVICE := m7332
-PRODUCT_NAME := twrp_m7332
+PRODUCT_NAME := omni_m7332 
 PRODUCT_BRAND := MTK
 PRODUCT_MODEL := Smart tv 
 PRODUCT_MANUFACTURER := mstar
