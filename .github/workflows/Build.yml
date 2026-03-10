@@ -21,15 +21,6 @@ jobs:
         sudo apt update
         sudo apt install -y bc build-essential libssl-dev libxml2-utils git zip unzip curl python3 python-is-python3
 
-    - name: Set up Repo Tool
-      run: |
-        mkdir -p ~/bin
-            - name: Set up Repo Tool
-        run: |
-        mkdir -p ~/bin
-        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-        chmod a+x ~/bin/repo
-        export PATH=$PATH:~/bin
     - name: Sync TWRP and Patch for TV
       run: |
         PATH=~/bin:$PATH
@@ -44,6 +35,16 @@ jobs:
         # تزوير ملف المكتبة المفقودة
         mkdir -p hardware/interfaces/health/2.0/default/
         echo 'cc_library_shared { name: "android.hardware.health@2.0", recovery_available: true, srcs: [], }' > hardware/interfaces/health/2.0/default/Android.bp
+
+    - name: Set up Repo Tool
+      run: |
+        mkdir -p ~/bin
+            - name: Set up Repo Tool
+        run: |
+        mkdir -p ~/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+        export PATH=$PATH:~/bin
 
     - name: Move Device Tree to Source
       run: |
