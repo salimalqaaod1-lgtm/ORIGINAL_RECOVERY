@@ -168,7 +168,8 @@ jobs:
         done
        
         
-        make recoveryimage -j$(nproc) || make recoveryimage -j1
+        mka recoveryimage -j2
+
          
          - name: Upload Recovery Image
         uses: actions/upload-artifact@v4
