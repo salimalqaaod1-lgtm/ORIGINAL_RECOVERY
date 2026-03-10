@@ -2,18 +2,14 @@ name: Build TWRP 9.0 for Smart TV
 
 on:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
       image: fr3akyphantom/droid-builder:latest # حاوية جاهزة لبناء الأندرويد
-
     steps:
       - name: Checkout Your Repository
         uses: actions/checkout@v4
-
-      
 
       - name: Install All Dependencies and Fix Libs
         run: |
