@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/MT9632_m7332.mk
+    $(LOCAL_DIR)/mt9632_m7332.mk
