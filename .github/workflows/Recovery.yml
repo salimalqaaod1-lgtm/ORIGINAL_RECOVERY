@@ -73,6 +73,12 @@ jobs:
           
           # 3. التأكد من أن الملفات وصلت للمكان الصحيح (اختياري للتأكد من السجلات)
           ls -R twrp/device/mediatek/m7332
+        
+      - name: Fix Permissions
+        run: |
+          sudo chmod -R 777 device/mediatek/m7332/
+           # أو الأمر الذي ذكرته أنت مع ضمان عدم توقف السكريبت
+          chmod -R 777 device/mediatek/m7332/recovery/root || true
 
       - name: Build TWRP
         run: |
