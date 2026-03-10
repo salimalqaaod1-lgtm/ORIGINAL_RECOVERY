@@ -58,12 +58,12 @@ jobs:
           
           source build/envsetup.sh
           # البناء باستخدام الاسم الجديد الموحد
-          lunch MT9632_m7332-eng
+          lunch mt9632_m7332-eng
           mka recoveryimage -j$(nproc --all)
 
 
       - name: Upload Recovery Image
         uses: actions/upload-artifact@v4
         with:
-          name: omin-MT9632-Final
+          name: mt9632-Final
           path: twrp/out/target/product/m7332/recovery.img
