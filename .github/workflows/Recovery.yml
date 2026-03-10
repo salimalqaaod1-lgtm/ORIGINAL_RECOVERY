@@ -15,7 +15,7 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y bc build-essential git-core gnupg flex bison gperf libsdl1.2-dev libwxgtk3.0-gtk3-dev squashfs-tools zip curl libncurses5-dev zlib1g-dev openjdk-8-jdk gcc-multilib g++-multilib x11proto-core-dev libx11-dev libgl1-mesa-dev libxml2-utils xsltproc unzip
+          sudo apt-get install -y bc build-essential git-core gnupg flex bison gperf libsdl1.2-dev libwxgtk3.0-gtk3-dev squashfs-tools zip curl libncurses5-dev zlib1g-dev openjdk-8-jdk gcc-multilib g++-multilib x11proto-core-dev libx11-dev libgl1-mesa-dev libxml2-utils xsltproc unzip libncurses5 libtinfo5
 
       - name: Set up Repo Tool
         run: |
