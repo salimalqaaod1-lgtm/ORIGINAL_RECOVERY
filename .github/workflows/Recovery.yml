@@ -29,9 +29,9 @@ jobs:
           
           # حل مشكلة libtinfo.so.5 يدوياً
           sudo ln -sf /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
-
-            - name: Set up Repo Tool
-           run: |
+        
+      - name: Set up Repo Tool
+        run: |
           # إنشاء مجلد الأدوات
           mkdir -p ~/bin
           
