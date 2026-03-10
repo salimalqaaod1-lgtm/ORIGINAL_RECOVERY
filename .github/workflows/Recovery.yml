@@ -41,16 +41,20 @@ jobs:
 
           # "تطهير" ملف البطارية
           echo -e "#include <recovery_utils/battery_utils.h>\n\nResult get_battery_stats(int* level, bool* charging) {\n    return Result::UNKNOWN;\n}" > bootable/recovery/recovery_utils/battery_utils.cpp || true
-
-      - name: Move Device Tree to Source
-        run: |
-          cd twrp
+          
+          - name: Move Device Tree to Source
+          run: |
+          # 1. إنشاء المجلد الوجهة داخل سورس الأندرويد
           mkdir -p twrp/device/mediatek/m7332
+          
+          # 2. نقل ملفاتك من المجلد الحالي إلى مسار البناء
+          # نستخدم --exclude لمنع rsync من نسخ مجلد twrp إلى داخل نفسه (تجنب الـ Loop)
+          # ونمنع نسخ ملفات الـ git والـ github لأن المترجم لا يحتاجها
+          rsync -av ./ twrp/device/mediatek/m7332/ --exclude twrp --exclude .git --exclude .github
+          
+          # 3. التأكد من أن الملفات وصلت للمكان الصحيح (اختياري للتأكد من السجلات)
+          ls -R twrp/device/mediatek/m7332
 
-          find . -maxdepth 1 -not -name 'twrp' -not -name '.' -not -name '..' -not -name '.git' -not -name '.github' -exec cp -R {} twrp/device/mediatek/m7332/ \; 
-             rm -rf twrp/device/mediatek/m7332/.github
-             rm -rf twrp/device/mediatek/m7332/.git
-   
       - name: Build TWRP
         run: |
           export PATH=~/bin:$PATH
