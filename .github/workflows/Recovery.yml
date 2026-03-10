@@ -45,9 +45,12 @@ jobs:
       - name: Move Device Tree to Source
         run: |
           cd twrp
-          # استخدام اسم المستودع الذي ذكرته مع تصحيح المسار
-          git clone https://github.com/salimalqaaod1-lgtm/ORGINAL_RECVORE.git device/mediatek/m7332
+          mkdir -p twrp/device/mediatek/m7332
 
+          find . -maxdepth 1 -not -name 'twrp' -not -name '.' -not -name '..' -not -name '.git' -not -name '.github' -exec cp -R {} twrp/device/mediatek/m7332/ \; 
+             rm -rf twrp/device/mediatek/m7332/.github
+             rm -rf twrp/device/mediatek/m7332/.git
+   
       - name: Build TWRP
         run: |
           export PATH=~/bin:$PATH
