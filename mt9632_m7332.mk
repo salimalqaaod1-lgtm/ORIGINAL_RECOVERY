@@ -1,7 +1,7 @@
 $(call inherit-product, vendor/omni/config/common.mk)
 
 $(call inherit-product,device/mediatek/m7332/device.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/omin_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/omni_base.mk)
 
 PRODUCT_DEVICE := m7332
 PRODUCT_NAME := mt9632_m7332 
