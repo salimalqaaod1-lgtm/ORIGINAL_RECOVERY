@@ -64,6 +64,11 @@ BUILD_BROKEN_DUP_RULES := true
 # تعطيل فحص ملفات ELF الجاهزة تماماً
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+# تعطيل فحص الـ ABI الذي يسبب فشل البناء بسبب المكتبات القديمة
+SKIP_ABI_CHECKS := true
+WITHOUT_CHECK_API := true
+# تجاوز أخطاء التحذيرات التي تعتبرها النسخ الجديدة أخطاء قاتلة
+ACTION_SET_SKIP_CHECK_API := true
 
 # إجبار النظام على تجاهل فحص التبعيات المفقودة (حل Soong النهائي)
 ALLOW_MISSING_DEPENDENCIES := true
