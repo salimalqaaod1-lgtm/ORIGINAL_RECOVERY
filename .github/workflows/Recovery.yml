@@ -15,19 +15,19 @@ jobs:
       - name: Install All Dependencies and Fix Libs
         run: |
           sudo apt-get update
-          # تثبيت الأدوات الأساسية
+          # تثبيت الأدوات الأساسية (تم حذف الحزمة المسببة للخطأ)
           sudo apt-get install -y bc build-essential git-core gnupg flex bison gperf libsdl1.2-dev \
             libwxgtk3.0-gtk3-dev squashfs-tools zip curl zlib1g-dev openjdk-8-jdk \
             gcc-multilib g++-multilib x11proto-core-dev libx11-dev libgl1-mesa-dev libxml2-utils \
-            xsltproc unzip python2 python-is-python2 lib32ncurses5-dev lib32z1-dev
+            xsltproc unzip python2 lib32ncurses5-dev lib32z1-dev
           
-          # تحميل وتثبيت المكتبات المفقودة التي سببت الخطأ في الصورة (إصدارات محددة)
+          # تحميل وتثبيت المكتبات المفقودة (حل NCURSES_TINFO_5)
           wget http://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.2-0ubuntu2_amd64.deb
           wget http://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libncurses5_6.2-0ubuntu2_amd64.deb
           sudo dpkg -i libtinfo5_6.2-0ubuntu2_amd64.deb
           sudo dpkg -i libncurses5_6.2-0ubuntu2_amd64.deb
 
-          # إجبار النظام على استخدام Python 2 لتجنب أخطاء السكربتات (SyntaxError)
+          # الحل البديل واليدوي لـ python-is-python2 (لحل خطأ الأقواس)
           sudo ln -sf /usr/bin/python2 /usr/bin/python
           
           # توفير توافقية إضافية للمكتبات
