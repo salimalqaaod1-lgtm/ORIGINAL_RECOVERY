@@ -51,6 +51,19 @@ jobs:
         # التأكد من نظافة المسار من ملفات الجيت الزائدة
         rm -rf twrp/device/mediatek/m7332/.github
         rm -rf twrp/device/mediatek/m7332/.git
+     
+        - name: Maximize Build Space & Swap
+         run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          # إنشاء 8 جيجا إضافية كرام وهمي
+          sudo fallocate -l 8G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+
+
 
     - name: Build Minimal TWRP
       run: |
