@@ -30,6 +30,20 @@ jobs:
         curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
         chmod a+x ~/bin/repo
         export PATH=$PATH:~/bin
+    - name: Sync TWRP and Patch for TV
+      run: |
+        PATH=~/bin:$PATH
+        mkdir twrp && cd twrp
+        repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11 --depth=1
+        repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
+
+        # حذف تعريفات الهاتف فوراً لمنع تعليق الرام وأخطاء Health
+        rm -rf hardware/interfaces/health
+        rm -rf hardware/interfaces/telephony
+        
+        # تزوير ملف المكتبة المفقودة
+        mkdir -p hardware/interfaces/health/2.0/default/
+        echo 'cc_library_shared { name: "android.hardware.health@2.0", recovery_available: true, srcs: [], }' > hardware/interfaces/health/2.0/default/Android.bp
 
     - name: Move Device Tree to Source
       run: |
