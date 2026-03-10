@@ -24,9 +24,9 @@ PRODUCT_CHARACTERISTICS := tv
 PRODUCT_IS_ATV := true
 
 # استدعاء إعدادات التلفاز الأساسية بدلاً من الهاتف
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_32_bit.mk) # أو core_32_bit حسب معالجك
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+# $(call inherit-product, $(SRC_TARGET_DIR)/product/core_32_bit.mk) # أو core_32_bit حسب معالجك
+# $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+# $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 # استدعاء ملفات تعريف المنتج الأساسية
 $(call inherit-product, $(SRC_TARGET_DIR)/product/omin_base.mk)
