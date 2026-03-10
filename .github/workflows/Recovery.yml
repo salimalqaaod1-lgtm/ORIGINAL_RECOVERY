@@ -40,10 +40,10 @@ jobs:
           repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
 
           # "تطهير" ملف البطارية
-          echo -e "#include <recovery_utils/battery_utils.h>\n\nResult get_battery_stats(int* level, bool* charging) {\n    return Result::UNKNOWN;\n}" > bootable/recovery/recovery_utils/battery_utils.cpp || true
+          # echo -e "#include <recovery_utils/battery_utils.h>\n\nResult get_battery_stats(int* level, bool* charging) {\n    return Result::UNKNOWN;\n}" > bootable/recovery/recovery_utils/battery_utils.cpp || true
           
-          - name: Move Device Tree to Source
-          run: |
+      - name: Move Device Tree to Source
+        run: |
           # 1. إنشاء المجلد الوجهة داخل سورس الأندرويد
           mkdir -p twrp/device/mediatek/m7332
           
