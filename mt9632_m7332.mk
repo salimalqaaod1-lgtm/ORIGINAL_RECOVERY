@@ -13,14 +13,3 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 TARGET_ARCH := arm
 PRODUCT_CHARACTERISTICS := tv
 PRODUCT_IS_ATV := true
-
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0 \
-    android.hardware.boot@1.1 \
-    android.hardware.health@2.0-impl-default \
-    libc \
-    libbase \
-    libcutils \
-    liblog
-
- 
