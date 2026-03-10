@@ -10,14 +10,7 @@ jobs:
       - name: Checkout Your Repository
         uses: actions/checkout@v4
 
-      - name: Cleanup & Setup Swap
-        run: |
-          sudo swapoff -a || true
-          sudo rm -f /swapfile
-          sudo fallocate -l 10G /swapfile
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
+      
 
       - name: Install Build Dependencies
         run: |
@@ -65,7 +58,7 @@ jobs:
           
           source build/envsetup.sh
           # البناء باستخدام الاسم الجديد الموحد
-          lunch omni_m7332-eng
+          lunch MT9632_m7332-eng
           mka recoveryimage -j$(nproc --all)
 
 
