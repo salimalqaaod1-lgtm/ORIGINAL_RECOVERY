@@ -19,6 +19,14 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Specify Architecture for ARM32
 TARGET_ARCH := arm
+# إخبار النظام أن الجهاز هو شاشة سمارت
+PRODUCT_CHARACTERISTICS := tv
+PRODUCT_IS_ATV := true
+
+# استدعاء إعدادات التلفاز الأساسية بدلاً من الهاتف
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk) # أو core_32_bit حسب معالجك
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 # استدعاء ملفات تعريف المنتج الأساسية
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
@@ -28,11 +36,9 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0 \
     android.hardware.boot@1.1 \
     android.hardware.health@2.0-impl-default \
-    libc \
+    libc \#
     libbase \
     libcutils \
     liblog
 
-# إخبار النظام أن هذا الجهاز "تلفاز" وليس هاتف
-PRODUCT_CHARACTERISTICS := tv
-PRODUCT_IS_ATV := true
+ 
