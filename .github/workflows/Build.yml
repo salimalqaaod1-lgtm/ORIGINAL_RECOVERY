@@ -108,8 +108,18 @@ jobs:
         }
         EOF
 
+        # إنشاء مجلد وهمي للمكتبة المفقودة
         mkdir -p hardware/interfaces/health/utils/libhealthhalutils/include/healthhalutils/
         touch hardware/interfaces/health/utils/libhealthhalutils/include/healthhalutils/HealthHalUtils.h
+
+        # إنشاء ملف بناء وهمي للمكتبة لكي يظن النظام أنها موجودة
+        cat <<EOF > hardware/interfaces/health/utils/libhealthhalutils/Android.bp
+        cc_library_static {
+        name: "libhealthhalutils",
+        recovery_available: true,
+        export_include_dirs: ["include"],
+         }
+         EOF
 
         rm -rf system/tools/hidl/test
         rm -rf hardware/interfaces
