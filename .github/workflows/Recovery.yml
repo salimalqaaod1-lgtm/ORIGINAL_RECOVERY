@@ -60,10 +60,14 @@ jobs:
         run: |
           export PATH=~/bin:$PATH
           cd twrp
+          # إصلاح الأذونات لملفات الـ root
+          chmod -R 777 device/mediatek/m7332/recovery/root || true
+          
           source build/envsetup.sh
-          # اختيار وضع البناء المناسب للمعالج m7332
-          lunch omni_m7332-eng || lunch omin_m7332-userdebug
-          mka recoveryimage -j2
+          # البناء باستخدام الاسم الجديد الموحد
+          lunch omni_m7332-eng
+          mka recoveryimage -j$(nproc --all)
+
 
       - name: Upload Recovery Image
         uses: actions/upload-artifact@v4
