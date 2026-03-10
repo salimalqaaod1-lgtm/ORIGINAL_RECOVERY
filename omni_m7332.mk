@@ -6,7 +6,7 @@ $(call inherit-product, vendor/omni/config/common.mk)
 
 # Inherit from m7332 device config
 # بما أن ملفاتك في المجلد الرئيسي، نستخدم المسار المباشر
-$(call inherit-product,device/mediatek/m7332/device.mk)
+# $(call inherit-product,device/mediatek/m7332/device.mk)
 
 PRODUCT_DEVICE := m7332
 PRODUCT_NAME := omni_m7332 
