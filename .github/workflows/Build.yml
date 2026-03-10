@@ -24,50 +24,12 @@ jobs:
     - name: Set up Repo Tool
       run: |
         mkdir -p ~/bin
+            - name: Set up Repo Tool
+        run: |
+        mkdir -p ~/bin
         curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
         chmod a+x ~/bin/repo
-        echo "$HOME/bin" >> $GITHUB_PATH
-
-        - name: Sync TWRP and Patch for TV
-        run: |
-        mkdir twrp && cd twrp
-        git config --global user.email "gh-actions@example.com"
-        git config --global user.name "GitHub-Actions"
-        
-        # 1. المزامنة (تأكد من استخدام سورس Minimal لتقليل الحجم)
-        ~/bin/repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11 --depth=1
-        ~/bin/repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
-
-        # 2. "تطهير" السورس ليتناسب مع نمط الشاشات (حذف تعريفات الهاتف)
-        rm -rf hardware/interfaces/health
-        rm -rf hardware/interfaces/telephony
-        rm -rf hardware/interfaces/biometrics
-
-        # 3. تزوير ملفات الهيدر (Stubbing) لمنع أخطاء "File not found"
-        mkdir -p hardware/interfaces/health/utils/libhealthhalutils/include/healthhalutils/
-        touch hardware/interfaces/health/utils/libhealthhalutils/include/healthhalutils/HealthHalUtils.h
-
-        # 4. إنشاء ملف Android.bp وهمي للمكتبة المطلوبة
-        cat <<EOF > hardware/interfaces/health/utils/libhealthhalutils/Android.bp
-        cc_library_static {
-            name: "libhealthhalutils",
-            recovery_available: true,
-            export_include_dirs: ["include"],
-        }
-        EOF
-
-        # 5. تزوير مكتبة الـ HAL الأساسية لـ أندرويد 11
-        mkdir -p hardware/interfaces/health/2.0/default/
-        cat <<EOF > hardware/interfaces/health/2.0/default/Android.bp
-        cc_library_shared {
-            name: "android.hardware.health@2.0",
-            recovery_available: true,
-            srcs: [],
-        }
-        EOF
-
-        # 6. تعديل كود الريكفري ليتجاهل استدعاء البطارية (لأنها شاشة)
-        find bootable/recovery -name "battery_utils.cpp" -exec sed -i 's/#include <healthhalutils\/HealthHalUtils.h>/\/\/ #include <healthhalutils\/HealthHalUtils.h>/g' {} +
+        export PATH=$PATH:~/bin
 
     - name: Move Device Tree to Source
       run: |
