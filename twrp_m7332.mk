@@ -1,8 +1,8 @@
 # Inherit from generic Android products.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+# $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 # Inherit from our custom vendor setup (TWRP)
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/omni/config/common.mk)
 
 # Inherit from m7332 device config
 # بما أن ملفاتك في المجلد الرئيسي، نستخدم المسار المباشر
@@ -24,12 +24,12 @@ PRODUCT_CHARACTERISTICS := tv
 PRODUCT_IS_ATV := true
 
 # استدعاء إعدادات التلفاز الأساسية بدلاً من الهاتف
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk) # أو core_32_bit حسب معالجك
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_32_bit.mk) # أو core_32_bit حسب معالجك
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 # استدعاء ملفات تعريف المنتج الأساسية
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/omin_base.mk)
 
 # إضافة المكتبات التي استخرجتها من التلفاز (الموجودة في صورك)
 PRODUCT_PACKAGES += \
