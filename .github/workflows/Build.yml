@@ -46,14 +46,14 @@ jobs:
         # نسخ كافة الملفات والمجلدات (بما فيها recovery/root) من الواجهة
         # تم استخدام أمر cp -R لضمان النسخ المتكرر للمجلدات الداخلية
         # مع استثناء مجلد 'twrp' لتجنب النسخ اللانهائي داخل نفسه
-        find . -maxdepth 1 -not -name 'twrp' -not -name '.' -not -name '..' -not -name '.git' -not -name '.github' -exec cp -R {} twrp/device/mediatek/m7332/ \;
+        # find . -maxdepth 1 -not -name 'twrp' -not -name '.' -not -name '..' -not -name '.git' -not -name '.github' -exec cp -R {} twrp/device/mediatek/m7332/ \;
         
         # التأكد من نظافة المسار من ملفات الجيت الزائدة
         rm -rf twrp/device/mediatek/m7332/.github
         rm -rf twrp/device/mediatek/m7332/.git
      
-        - name: Maximize Build Space & Swap
-         run: |
+    - name: Maximize Build Space & Swap
+      run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/ghc
