@@ -39,6 +39,7 @@ jobs:
       - name: Move Device Tree to Source
         run: |
           # 1. إنشاء المجلد الوجهة داخل سورس الأندرويد
+          chmod -R 777 device/mediatek/m7332/recovery/root || true
           mkdir -p twrp/device/mediatek/m7332
           
           # 2. نقل ملفاتك من المجلد الحالي إلى مسار البناء
@@ -56,6 +57,7 @@ jobs:
           # إصلاح الأذونات لملفات الـ root
           chmod -R 777 device/mediatek/m7332/recovery/root || true
           
+
           source build/envsetup.sh
           # البناء باستخدام الاسم الجديد الموحد
           lunch mt9632_m7332-eng
