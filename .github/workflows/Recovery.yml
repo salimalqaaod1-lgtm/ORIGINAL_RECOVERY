@@ -56,7 +56,7 @@ jobs:
           cd twrp
           # إصلاح الأذونات لملفات الـ root
           chmod -R 777 device/mediatek/m7332/recovery/root || true
-          
+          sed -i 's/[[:space:]]*$//' device/mediatek/m7332/*.mk
 
           source build/envsetup.sh
           lunch mt9632_m7332-eng || lunch mt9632_m7332-userdebug
