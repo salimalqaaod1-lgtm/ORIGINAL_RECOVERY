@@ -15,7 +15,18 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y bc build-essential git-core gnupg flex bison gperf libsdl1.2-dev libwxgtk3.0-gtk3-dev squashfs-tools zip curl libncurses5-dev zlib1g-dev openjdk-8-jdk gcc-multilib g++-multilib x11proto-core-dev libx11-dev libgl1-mesa-dev libxml2-utils xsltproc unzip libncurses5 libtinfo5
+          sudo apt-get install -y bc build-essential git-core gnupg flex bison gperf libsdl1.2-dev \
+            libwxgtk3.0-gtk3-dev squashfs-tools zip curl libncurses5-dev zlib1g-dev openjdk-8-jdk \
+            gcc-multilib g++-multilib x11proto-core-dev libx11-dev libgl1-mesa-dev libxml2-utils \
+            xsltproc unzip python2 python-is-python2 libncurses5 libtinfo5 \
+            lib32ncurses5-dev lib32z1-dev
+          
+          # إجبار النظام على استخدام Python 2 كافتراضي لحل خطأ (SyntaxError: Missing parentheses)
+          sudo ln -sf /usr/bin/python2 /usr/bin/python
+          sudo ln -sf /usr/bin/python2 /usr/bin/python2.7
+
+          # حل احتياطي لمكتبة libtinfo المفقودة في بعض بيئات GitHub
+          sudo ln -sf /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
 
       - name: Set up Repo Tool
         run: |
