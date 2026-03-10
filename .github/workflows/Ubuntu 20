@@ -1,0 +1,71 @@
+name: Build TWRP 9.0 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Your Repository
+        uses: actions/checkout@v4
+
+      
+
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bc build-essential git-core gnupg flex bison gperf libsdl1.2-dev libwxgtk3.0-gtk3-dev squashfs-tools zip curl libncurses5-dev zlib1g-dev openjdk-8-jdk gcc-multilib g++-multilib x11proto-core-dev libx11-dev libgl1-mesa-dev libxml2-utils xsltproc unzip libncurses5 libtinfo5
+
+      - name: Set up Repo Tool
+        run: |
+          mkdir -p ~/bin
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+x ~/bin/repo
+          echo "PATH=$HOME/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Sync TWRP 9.0 Source
+        run: |
+          export PATH=~/bin:$PATH
+          mkdir twrp && cd twrp
+          # استخدام سورس Omni المضمون لإصدار 9.0
+          repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0 --depth=1
+          repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
+
+          # "تطهير" ملف البطارية
+          # echo -e "#include <recovery_utils/battery_utils.h>\n\nResult get_battery_stats(int* level, bool* charging) {\n    return Result::UNKNOWN;\n}" > bootable/recovery/recovery_utils/battery_utils.cpp || true        
+
+    
+      - name: Move Device Tree to Source
+        run: |
+          # 1. إنشاء المجلد الوجهة داخل سورس الأندرويد
+          chmod -R 777 device/mediatek/m7332/recovery/root || true
+          mkdir -p twrp/device/mediatek/m7332
+          
+          # 2. نقل ملفاتك من المجلد الحالي إلى مسار البناء
+          # نستخدم --exclude لمنع rsync من نسخ مجلد twrp إلى داخل نفسه (تجنب الـ Loop)
+          # ونمنع نسخ ملفات الـ git والـ github لأن المترجم لا يحتاجها
+          rsync -av ./ twrp/device/mediatek/m7332/ --exclude twrp --exclude .git --exclude .github
+          
+          # 3. التأكد من أن الملفات وصلت للمكان الصحيح (اختياري للتأكد من السجلات)
+          ls -R twrp/device/mediatek/m7332
+
+      - name: Build TWRP
+        run: |
+          export PATH=~/bin:$PATH
+          cd twrp
+          # إصلاح الأذونات لملفات الـ root
+          chmod -R 777 device/mediatek/m7332/recovery/root || true
+          sed -i 's/[[:space:]]*$//' device/mediatek/m7332/*.mk
+
+          source build/envsetup.sh
+          lunch mt9632_m7332-eng || lunch mt9632_m7332-userdebug
+                
+          mka recoveryimage -j$(nproc --all)
+
+
+      - name: Upload Recovery Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: mt9632-Final
+          path: twrp/out/target/product/m7332/recovery.img
