@@ -50,7 +50,7 @@ jobs:
           export PATH=~/bin:$PATH
           cd twrp
           # تأكد من وضع رابط الـ Device Tree الخاص بك هنا
-          git clone https://github.com/salimalqaaod1-lgtm/android_device_mediatek_m7332.git device/mediatek/m7332
+          git clone https://github.com/salimalqaaod1-lgtm/ORGINAL_RECVORE.git device/mediatek/m7332
           
           source build/envsetup.sh
           lunch twrp_m7332-eng
