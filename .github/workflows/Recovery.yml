@@ -54,7 +54,7 @@ jobs:
           # استخدام سورس Omni المضمون لإصدار 9.0
           repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0 --depth=1
           repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
-
+          
           # "تطهير" ملف البطارية
           # echo -e "#include <recovery_utils/battery_utils.h>\n\nResult get_battery_stats(int* level, bool* charging) {\n    return Result::UNKNOWN;\n}" > bootable/recovery/recovery_utils/battery_utils.cpp || true        
 
@@ -64,7 +64,8 @@ jobs:
           # 1. إنشاء المجلد الوجهة داخل سورس الأندرويد
           chmod -R 777 device/mediatek/m7332/recovery/root || true
           mkdir -p twrp/device/mediatek/m7332
-          
+          sudo chmod -R 777 device/mediatek/m7332/
+
           # 2. نقل ملفاتك من المجلد الحالي إلى مسار البناء
           # نستخدم --exclude لمنع rsync من نسخ مجلد twrp إلى داخل نفسه (تجنب الـ Loop)
           # ونمنع نسخ ملفات الـ git والـ github لأن المترجم لا يحتاجها
