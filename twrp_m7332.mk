@@ -33,3 +33,6 @@ PRODUCT_PACKAGES += \
     libcutils \
     liblog
 
+# إخبار النظام أن هذا الجهاز "تلفاز" وليس هاتف
+PRODUCT_CHARACTERISTICS := tv
+PRODUCT_IS_ATV := true
