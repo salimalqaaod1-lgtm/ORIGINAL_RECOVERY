@@ -80,6 +80,9 @@ TW_EXCLUDE_QUOTAS := true
 TW_NO_BATTERY_PERCENT := true
   TW_INCLUDE_CRYPTO := false
   TW_EXCLUDE_ENCRYPTED_BACKUPS := true
+TARGET_PREBUILT_KERNEL := device/mediatek/m7332/kernel
+TARGET_PREBUILT_DTB := device/mediatek/m7332/dtb.img
+BOARD_KERNEL_IMAGE_NAME := kernel
 
 TW_INCLUDE_CRYPTO_FBE := false
   AB_OTA_UPDATER := false
