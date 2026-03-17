@@ -4,7 +4,7 @@ $(call inherit-product,device/mediatek/m7332/device.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 PRODUCT_DEVICE := m7332
-PRODUCT_NAME := mt9632_m7332 
+PRODUCT_NAME := omni_mt9632_m7332 
 PRODUCT_BRAND := MTK
 PRODUCT_MODEL := Smart tv 
 PRODUCT_MANUFACTURER := mstar
