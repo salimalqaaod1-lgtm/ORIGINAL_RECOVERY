@@ -5,7 +5,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ir_remote.ini:recovery/root/vendor/etc/ir_remote.ini
 
 # Support for Dynamic Partitions
-PRODUCT_COPY_FILES += \
+# PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery.fstab:recovery/root/first_stage_ramdisk/fstab.m7332
 
 # Boot Script (تفعيل ملف التشغيل الذي يحتوي على أوامر الـ IR والـ USB)
