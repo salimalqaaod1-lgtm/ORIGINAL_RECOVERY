@@ -83,6 +83,10 @@ TW_NO_BATTERY_PERCENT := true
 TARGET_PREBUILT_KERNEL := device/mediatek/m7332/kernel
 TARGET_PREBUILT_DTB := device/mediatek/m7332/dtb.img
 BOARD_KERNEL_IMAGE_NAME := kernel
+# دعم التقسيم الديناميكي
+Target_ROMS_WITH_DYNAMIC_PARTITIONS := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_DYNAMIC_PARTITION_LIST := system vendor product
 
 TW_INCLUDE_CRYPTO_FBE := false
   AB_OTA_UPDATER := false
